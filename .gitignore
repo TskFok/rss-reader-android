@@ -1,0 +1,31 @@
+# macOS
+.DS_Store
+
+# Android/Gradle
+.gradle/
+**/build/
+local.properties
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Kotlin/IntelliJ/Android Studio
+.idea/
+*.iml
+.kotlinc/
+.kotlin/
+
+# Signing keys and sensitive files
+*.jks
+*.keystore
+keystore.properties
+
+# Logs
+*.log
+
+# Generated APK/AAB at project root
+*.apk
+*.aab
+
+# Misc
+.tmp/
