@@ -6,11 +6,14 @@ import com.example.rssreader.core.model.FeishuExchangeRequest
 import com.example.rssreader.core.model.FeishuLoginUrlResponse
 import com.example.rssreader.core.model.LoginRequest
 import com.example.rssreader.core.model.LoginResult
+import com.example.rssreader.core.model.MessageResponse
 import com.example.rssreader.core.model.PagedResponse
 import com.example.rssreader.core.model.SummaryHistoryItem
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.PUT
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface AuthApi {
@@ -38,6 +41,9 @@ interface ArticlesApi {
         @Query("page") page: Int,
         @Query("page_size") pageSize: Int,
     ): PagedResponse<Article>
+
+    @PUT("articles/{id}/read")
+    suspend fun markArticleRead(@Path("id") id: Long): MessageResponse
 }
 
 interface SummaryApi {

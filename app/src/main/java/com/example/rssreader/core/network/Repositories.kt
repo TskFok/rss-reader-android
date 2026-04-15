@@ -78,6 +78,10 @@ class ArticleRepository(
             pagingSourceFactory = { ArticlesPagingSource(api = api, feedId = feedId, read = read) },
         ).flow
     }
+
+    suspend fun markAsRead(articleId: Long) {
+        api.markArticleRead(articleId)
+    }
 }
 
 class SummaryRepository(

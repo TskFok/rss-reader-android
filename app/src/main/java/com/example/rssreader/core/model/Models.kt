@@ -16,6 +16,11 @@ data class LoginResult(
 )
 
 @JsonClass(generateAdapter = true)
+data class MessageResponse(
+    val message: String,
+)
+
+@JsonClass(generateAdapter = true)
 data class User(
     val id: Long,
     val username: String,
