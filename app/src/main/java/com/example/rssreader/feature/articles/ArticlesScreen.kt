@@ -146,14 +146,16 @@ private fun ArticleDetailContent(
                 factory = { ctx ->
                     android.webkit.WebView(ctx).apply {
                         overScrollMode = android.view.View.OVER_SCROLL_IF_CONTENT_SCROLLS
-                        settings.javaScriptEnabled = false
+                        settings.javaScriptEnabled = true
                         settings.loadsImagesAutomatically = true
                         settings.builtInZoomControls = false
                         settings.displayZoomControls = false
-                        settings.domStorageEnabled = false
+                        settings.domStorageEnabled = true
+                        settings.mediaPlaybackRequiresUserGesture = false
                         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
                             settings.mixedContentMode = android.webkit.WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE
                         }
+                        webChromeClient = android.webkit.WebChromeClient()
                         isVerticalScrollBarEnabled = true
                         setOnTouchListener { v, event ->
                             when (event.actionMasked) {
@@ -170,6 +172,7 @@ private fun ArticleDetailContent(
                                 request: android.webkit.WebResourceRequest?,
                             ): Boolean {
                                 val url = request?.url?.toString() ?: return false
+                                if (request.isForMainFrame != true) return false
                                 context.startActivity(android.content.Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse(url)))
                                 return true
                             }
@@ -184,6 +187,7 @@ private fun ArticleDetailContent(
                             <style>
                               body { font-size: 16px; line-height: 1.6; margin: 0; padding: 0; }
                               img { max-width: 100%; height: auto; display: block; margin: 8px 0; }
+                              iframe, video { max-width: 100% !important; width: 100% !important; min-height: 220px; border: 0; }
                               pre, code { white-space: pre-wrap; word-break: break-word; }
                               table { width: 100%; overflow-x: auto; display: block; }
                             </style>
